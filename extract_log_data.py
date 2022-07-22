@@ -21,6 +21,7 @@ def get_dataframe_from_log_files(log_files: list) -> pd.DataFrame:
     datetime_list = []
     data_list = []
     metadata_list = []
+    df_list = []
 
     for file in log_files:
         f = open(file)
@@ -37,11 +38,13 @@ def get_dataframe_from_log_files(log_files: list) -> pd.DataFrame:
             else:
                 datetime_list.append(log_line[0])
                 data_list.append(log_line[3])
-    metadata = format_metadata(metadata_list)
-    df = pd.DataFrame({'DATETIME': pd.to_datetime(datetime_list), 'DATA': data_list})
-    for key in metadata:
-        df[key] = metadata[key]
-    return df
+        metadata = format_metadata(metadata_list)
+        df = pd.DataFrame({'DATETIME': pd.to_datetime(datetime_list), 'DATA': data_list})
+        for key in metadata:
+            df[key] = metadata[key]
+        df_list.append(df)
+    df_out = pd.concat(df_list)
+    return df_out
 
 
 def main():
