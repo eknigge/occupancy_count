@@ -7,10 +7,10 @@
     "motorcycle": "5",
     "two_axle_truck": "6",
     "three_axle_truck": "7",
-    "van": "Q",
-    "transit": "T",
-    "transit_other": "Y",
-    "undo": "U"
+    "van": "q",
+    "transit": "t",
+    "transit_other": "y",
+    "undo": "u"
   },
   "data_parameters": {
     "one_passenger_car": "P1",
