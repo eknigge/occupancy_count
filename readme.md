@@ -68,9 +68,16 @@ You can also monitor the system using the command window. It displays all action
 When you are down simply close out the collection window.
 
 
-# Extract Data
+## Extract Data
 To extract data to a csv `all_data_extracted.csv` file, run the other script that comes with this module. This file reads all logs in the collection directory, extracts the relevant information, and outputs the results to a csv file. 
 
 ```
 python extract_log_data.py
+```
+
+## Summarize Data
+You can create a summary spreadsheet, `summary_results.xlsx`, if you utilize the `summarize_log_data.py` script. This summary closely matches what was done in previous years. The output creates a workbook with two worksheets, one for a data summary, and the other for an AM/PM summary for each type of vehicle.
+
+```
+python summarize_log_data.py
 ```
