@@ -189,6 +189,7 @@ def remove_last_line_in_file(*args):
         if pos > 0:
             file.seek(pos, os.SEEK_SET)
             file.truncate()
+        print('Undo Complete')
 
 
 def validate_keyboard_shortcuts(shortcuts: dict):

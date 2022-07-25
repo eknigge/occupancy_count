@@ -35,6 +35,8 @@ def get_dataframe_from_log_files(log_files: list) -> pd.DataFrame:
                 continue
             elif len(log_line) < 2:
                 continue
+            elif len(log_line) >= 7:
+                continue
             else:
                 datetime_list.append(log_line[0])
                 data_list.append(log_line[3])
@@ -51,7 +53,6 @@ def main():
     count_files = [i for i in os.listdir(os.getcwd()) if 'count.log' in i]
     df = get_dataframe_from_log_files(count_files)
     df.to_csv('all_data_extracted.csv')
-    print(df)
 
 
 if __name__ == '__main__':
