@@ -1,6 +1,8 @@
 import pandas as pd
 import os
 
+global add_date_and_time_data
+
 
 def remove_spaces(items: list) -> list:
     out = []
@@ -49,9 +51,44 @@ def get_dataframe_from_log_files(log_files: list) -> pd.DataFrame:
     return df_out
 
 
+def get_user_date_time_preference():
+    input_valid = False
+    global add_date_and_time_data
+    question = """
+Choose between [1] for adding date/time information, and [2] to
+exclude this information
+
+[1] Add date/time information
+[2] Do not add this information
+    """
+    while not input_valid:
+        print(question)
+        user_input = input(f'Input: ')
+        if str(user_input) == '1':
+            add_date_and_time_data = True
+            input_valid = True
+        elif str(user_input) == '2':
+            add_date_and_time_data = False
+            input_valid = True
+        else:
+            print(f'{user_input} is not a valid input')
+
+
+def add_date_time_information(df: pd.DataFrame):
+    global add_date_and_time_data
+    if add_date_and_time_data:
+        df['DATE'] = pd.to_datetime(df['DATETIME']).dt.date
+        df['TIME'] = pd.to_datetime(df['DATETIME']).dt.time
+        return df
+    else:
+        return df
+
+
 def main():
+    get_user_date_time_preference()
     count_files = [i for i in os.listdir(os.getcwd()) if 'count.log' in i]
     df = get_dataframe_from_log_files(count_files)
+    df = add_date_time_information(df)
     df.to_csv('all_data_extracted.csv')
 
 
