@@ -151,7 +151,7 @@ def start_collection_ui():
     root.bind(configuration_data['keyboard_shortcuts']['van'], log_van)
     root.bind(configuration_data['keyboard_shortcuts']['transit'], log_transit)
     root.bind(configuration_data['keyboard_shortcuts']['transit_other'], log_transit_other)
-    root.bind(configuration_data['keyboard_shortcuts']['undo'], remove_last_line_in_file)
+    root.bind(configuration_data['keyboard_shortcuts']['undo'], undo_last_action)
 
     # set resizing to occur evenly
     for i in range(5):
@@ -161,6 +161,12 @@ def start_collection_ui():
         root.grid_rowconfigure(i, weight=1)
 
     root.mainloop()
+
+
+def undo_last_action(*args):
+    print(f'Undo')
+    log_parameter = configuration_data['data_parameters']['undo']
+    logging.info(f'{log_parameter}')
 
 
 def remove_last_line_in_file(*args):

@@ -30,7 +30,10 @@ def get_dataframe_from_log_files(log_files: list) -> pd.DataFrame:
         for line in f:
             log_line = line.strip().split('-')
             log_line = remove_spaces(log_line)
-            if 'DEBUG' in log_line:
+            if 'UNDO' in log_line:
+                datetime_list.pop(-1)
+                data_list.pop(-1)
+            elif 'DEBUG' in log_line:
                 continue
             elif 'METADATA' in log_line:
                 metadata_list.append(log_line[-1])
